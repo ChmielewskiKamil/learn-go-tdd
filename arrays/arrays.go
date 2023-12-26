@@ -1,8 +1,9 @@
 package arrays
 
 func Sum(numbers []int) (sum int) {
-    for i := 0; i < 5; i++ {
-        sum += numbers[i]
+    // range returns the index and the value
+    for _, number := range numbers {
+        sum += number
     }
     return
 }
