@@ -2,6 +2,7 @@ package main
 
 import "testing"
 
+// `t` is the hook into testing framework
 func TestHello(t *testing.T) {
     want := "Hello, world."
     got := Hello()
