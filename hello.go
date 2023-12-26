@@ -8,5 +8,8 @@ func main() {
 
 func Hello(name string) string {
     const prefix = "Hello, "
+    if name == "" {
+        name = "World"
+    }
     return prefix + name + "."
 }
