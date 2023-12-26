@@ -14,4 +14,15 @@ func TestSum(t *testing.T) {
             t.Errorf("got %d want %d given, %v", got, want, numbers)
         }
     })
+
+    t.Run("sum of 3 numbers", func(t *testing.T) {
+        numbers := []int{1, 2, 3}
+
+        want := 6
+        got := Sum(numbers)
+
+        if got != want {
+            t.Errorf("got %d want %d given, %v", got, want, numbers)
+        }
+    })
 }
