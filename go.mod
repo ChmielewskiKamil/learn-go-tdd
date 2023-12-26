@@ -1,3 +1,3 @@
-module hello
+module learn-go-tdd
 
 go 1.21.5
