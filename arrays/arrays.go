@@ -14,3 +14,10 @@ func SumAll(slices ...[]int) (individualSums []int){
     }
     return 
 }
+
+func SumAllTails(slices ...[]int) (sums []int) {
+    for _, slice := range slices {
+        sums = append(sums, Sum(slice) - slice[0])
+    }
+    return
+}
