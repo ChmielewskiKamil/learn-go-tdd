@@ -17,7 +17,9 @@ func SumAll(slices ...[]int) (individualSums []int){
 
 func SumAllTails(slices ...[]int) (sums []int) {
     for _, slice := range slices {
-        sums = append(sums, Sum(slice) - slice[0])
+        // Take 1 from the front (syntax is low : high)
+        tail := slice [1:]
+        sums = append(sums, Sum(tail))
     }
     return
 }
