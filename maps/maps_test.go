@@ -4,9 +4,9 @@ import "testing"
 
 func TestDictionarySearch(t *testing.T) {
     searchKey := "test"
-    dictionary := map[string]string{searchKey: "this is just a test"}
+    dictionary := Dictionary{searchKey: "this is just a test"}
 
-    got := Search(dictionary, searchKey)
+    got := dictionary.Search(searchKey)
     want := "this is just a test"
 
     if got != want {
