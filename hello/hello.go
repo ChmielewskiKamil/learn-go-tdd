@@ -1,16 +1,16 @@
-package hello 
+package hello
 
 import "fmt"
 
 const (
-	spanish       = "Spanish"
-	french        = "French"
+	spanish = "Spanish"
+	french  = "French"
 
 	prefixEnglish = "Hello, "
 	prefixSpanish = "Hola, "
 	prefixFrench  = "Bonjour, "
 
-	suffix        = "."
+	suffix = "."
 )
 
 func Hello(name, language string) string {

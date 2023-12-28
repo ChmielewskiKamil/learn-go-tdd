@@ -15,14 +15,14 @@ func TestRepeat(t *testing.T) {
 		}
 	})
 
-    t.Run("user specify the repeat count", func(t *testing.T) {
-        repeated := Repeat("a", 7)
-        expected := "aaaaaaa"
+	t.Run("user specify the repeat count", func(t *testing.T) {
+		repeated := Repeat("a", 7)
+		expected := "aaaaaaa"
 
-        if repeated != expected {
-            t.Errorf("expected %q but got %q", expected, repeated)
-        }
-    })
+		if repeated != expected {
+			t.Errorf("expected %q but got %q", expected, repeated)
+		}
+	})
 }
 
 func BenchmarkRepeat(b *testing.B) {
