@@ -3,13 +3,14 @@ package maps
 import "testing"
 
 func TestDictionarySearch(t *testing.T) {
-    searchKey := "test"
-    dictionary := Dictionary{searchKey: "this is just a test"}
+	dictionary := Dictionary{"test": "this is just a test"}
 
-    got := dictionary.Search(searchKey)
-    want := "this is just a test"
+	t.Run("known word", func(t *testing.T) {
+		got := dictionary.Search("test")
+		want := "this is just a test"
 
-    if got != want {
-        t.Errorf("got %q want %q given, %q", got, want, searchKey)
-    }
+		if got != want {
+			t.Errorf("got %q want %q", got, want)
+		}
+	})
 }
