@@ -9,9 +9,7 @@ func TestDictionarySearch(t *testing.T) {
 		got, _ := dictionary.Search("test")
 		want := "this is just a test"
 
-		if got != want {
-			t.Errorf("got %q want %q", got, want)
-		}
+        assertString(t, got, want)
 	})
 
     t.Run("unknown word", func(t *testing.T) {
@@ -22,8 +20,14 @@ func TestDictionarySearch(t *testing.T) {
             t.Fatal("expected to get an error, but didn't get one")
         }
 
-        if err.Error() != want {
-            t.Errorf("got %q want %q", err, want)
-        }
+        assertString(t, err.Error(), want)
     })
+}
+
+func assertString(t testing.TB, got, want string) {
+    t.Helper()
+
+    if got != want {
+        t.Errorf("got %q want %q", got, want)
+    }
 }
