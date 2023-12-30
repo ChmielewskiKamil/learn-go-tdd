@@ -1,9 +1,15 @@
 package maps
 
-import "errors"
+const (
+	ErrNotFound   = DictionaryErr("Sorry, the word you are looking for is not in the dictionary.")
+	ErrWordExists = DictionaryErr("Sorry, the word you are trying to add already exists in the dictionary.")
+)
 
-var ErrNotFound = errors.New("Sorry, the word you are looking for is not in the dictionary.")
-var ErrWordExists = errors.New("Sorry, the word you are trying to add already exists in the dictionary.")
+type DictionaryErr string
+
+func (e DictionaryErr) Error() string {
+	return string(e)
+}
 
 type Dictionary map[string]string
 
@@ -24,10 +30,10 @@ func (d Dictionary) Add(word, definition string) error {
 	// If search returned nil, it means that it suceeded
 	case nil:
 		return ErrWordExists
-    // Handle any other error
-    default: 
-        return err
+	// Handle any other error
+	default:
+		return err
 	}
-    // All good
+	// All good
 	return nil
 }
