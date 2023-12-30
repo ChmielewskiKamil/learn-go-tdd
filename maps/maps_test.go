@@ -43,21 +43,30 @@ func TestDictionaryAdd(t *testing.T) {
 func TestDictionaryUpdate(t *testing.T) {
 	existingWord := "existing word"
 	existingDefinition := "this is an existing definition"
-	dictionary := Dictionary{existingWord: existingDefinition}
 
 	t.Run("existing word", func(t *testing.T) {
+        dictionary := Dictionary{existingWord: existingDefinition}
 		newDefinition := "this is a new definition"
 		dictionary.Update(existingWord, newDefinition)
 		assertDefinition(t, dictionary, existingWord, newDefinition)
 	})
 
-    t.Run("new word", func(t *testing.T) {
-        newWord := "new word"
-        newDefinition := "this is a new definition"
-        err := dictionary.Update(newWord, newDefinition)
+	t.Run("new word", func(t *testing.T) {
+	    dictionary := Dictionary{existingWord: existingDefinition}
+		newWord := "new word"
+		newDefinition := "this is a new definition"
+		err := dictionary.Update(newWord, newDefinition)
 
-        assertError(t, err, ErrWordDoesNotExist)
-    })
+		assertError(t, err, ErrWordDoesNotExist)
+	})
+
+	t.Run("new definition is the same as old one", func(t *testing.T) {
+	    dictionary := Dictionary{existingWord: existingDefinition}
+        newDefinition := "this is an existing definition"
+		err := dictionary.Update(existingWord, newDefinition)
+
+		assertError(t, err, ErrNewDefinitionIsSameAsOld)
+	})
 }
 
 func assertDefinition(t testing.TB, dictionary Dictionary, word, definition string) {
