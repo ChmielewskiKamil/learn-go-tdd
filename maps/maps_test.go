@@ -37,6 +37,17 @@ func TestDictionaryAdd(t *testing.T) {
 
         assertString(t, got, want)
     })
+
+    t.Run("existing word", func(t *testing.T){
+        dictionary := Dictionary{"existing word": "this is an existing word"}
+        err := dictionary.Add("existing word", "this is an existing word")
+
+        if err == nil {
+            t.Fatal("should not be able to add an existing word")
+        }
+
+        assertError(t, err, ErrWordExists)
+    })
 }
 
 func assertString(t testing.TB, got, want string) {

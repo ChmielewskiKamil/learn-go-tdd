@@ -3,6 +3,7 @@ package maps
 import "errors"
 
 var ErrNotFound = errors.New("Sorry, the word you are looking for is not in the dictionary.")
+var ErrWordExists = errors.New("Sorry, the word you are trying to add already exists in the dictionary.")
 
 type Dictionary map[string]string
 
@@ -14,6 +15,19 @@ func (d Dictionary) Search(word string) (entry string, searchError error) {
 	return definition, nil
 }
 
-func (d Dictionary) Add(word, definition string) {
-    d[word] = definition
+func (d Dictionary) Add(word, definition string) error {
+	_, err := d.Search(word)
+	switch err {
+	// Type of error that Search might return
+	case ErrNotFound:
+		d[word] = definition
+	// If search returned nil, it means that it suceeded
+	case nil:
+		return ErrWordExists
+    // Handle any other error
+    default: 
+        return err
+	}
+    // All good
+	return nil
 }
