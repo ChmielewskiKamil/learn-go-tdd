@@ -6,14 +6,17 @@ import (
 )
 
 func TestCountdown(t *testing.T) {
-    buffer := &bytes.Buffer{}
-    
-    Countdown(buffer)
+	buffer := &bytes.Buffer{}
 
-    got := buffer.String()
-    want := "3"
+	Countdown(buffer)
 
-    if got != want {
-        t.Errorf("got %q want %q", got, want)
-    }
+	got := buffer.String()
+	want := `3
+2
+1
+Go!`
+
+	if got != want {
+		t.Errorf("got %q want %q", got, want)
+	}
 }

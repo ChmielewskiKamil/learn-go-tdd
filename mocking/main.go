@@ -11,5 +11,8 @@ func main() {
 }
 
 func Countdown(out io.Writer) {
-    fmt.Fprint(out, "3")
+    fmt.Fprint(out, "3\n")
+    fmt.Fprint(out, "2\n")
+    fmt.Fprint(out, "1\n")
+    fmt.Fprint(out, "Go!")
 }
