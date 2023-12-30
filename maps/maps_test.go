@@ -40,6 +40,18 @@ func TestDictionaryAdd(t *testing.T) {
 	})
 }
 
+func TestDictionaryUpdate(t *testing.T) {
+	existingWord := "existing word"
+	existingDefinition := "this is an existing definition"
+	dictionary := Dictionary{existingWord: existingDefinition}
+
+	t.Run("existing word", func(t *testing.T) {
+		newDefinition := "this is a new definition"
+		dictionary.Update(existingWord, newDefinition)
+		assertDefinition(t, dictionary, existingWord, newDefinition)
+	})
+}
+
 func assertDefinition(t testing.TB, dictionary Dictionary, word, definition string) {
 	t.Helper()
 
