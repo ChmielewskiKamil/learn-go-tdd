@@ -67,6 +67,14 @@ func TestDictionaryUpdate(t *testing.T) {
 
 		assertError(t, err, ErrNewDefinitionIsSameAsOld)
 	})
+
+    t.Run("delete existing word", func(t *testing.T) {
+        dictionary := Dictionary{existingWord: existingDefinition}
+        dictionary.Delete(existingWord)
+
+        _, err := dictionary.Search(existingWord)
+        assertError(t, err, ErrNotFound)
+    })
 }
 
 func assertDefinition(t testing.TB, dictionary Dictionary, word, definition string) {
