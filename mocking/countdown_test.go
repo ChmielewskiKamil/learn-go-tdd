@@ -27,9 +27,7 @@ const (
 func TestCountdown(t *testing.T) {
 	t.Run("prints 3 to Go!", func(t *testing.T) {
 		buffer := &bytes.Buffer{}
-		spySleeper := &SpyCountdownOperation{}
-
-		Countdown(buffer, spySleeper)
+		Countdown(buffer, &SpyCountdownOperation{})
 
 		got := buffer.String()
 		want := `3
@@ -40,14 +38,11 @@ Go!`
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}
-
-		if len(spySleeper.Calls) != 3 {
-			t.Errorf("not enough calls to sleeper, want 3 got %v", spySleeper.Calls)
-		}
 	})
+
 	t.Run("sleep before every print", func(t *testing.T) {
 		spySleeperPrinter := &SpyCountdownOperation{}
-        Countdown(spySleeperPrinter, spySleeperPrinter)
+		Countdown(spySleeperPrinter, spySleeperPrinter)
 
 		want := []string{
 			write,
