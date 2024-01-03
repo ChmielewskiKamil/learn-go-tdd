@@ -2,9 +2,11 @@ package blogrenderer_test
 
 import (
 	"bytes"
-	approvals "github.com/approvals/go-approval-tests"
+	"io"
 	"learn-go-tdd/blogrenderer"
 	"testing"
+
+	approvals "github.com/approvals/go-approval-tests"
 )
 
 func TestRender(t *testing.T) {
@@ -28,4 +30,20 @@ func TestRender(t *testing.T) {
 
 		approvals.VerifyString(t, buf.String())
 	})
+}
+
+func BenchmarkRender(b *testing.B) {
+	var (
+		aPost = blogrenderer.Post{
+			Title:       "hello world",
+			Body:        "This is a post",
+			Description: "This is a description",
+			Tags:        []string{"go", "tdd"},
+		}
+	)
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		blogrenderer.Render(io.Discard, aPost)
+	}
 }
