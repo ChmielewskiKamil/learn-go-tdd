@@ -2,11 +2,13 @@ package blogrenderer_test
 
 import (
 	"bytes"
+	approvals "github.com/approvals/go-approval-tests"
 	"learn-go-tdd/blogrenderer"
 	"testing"
 )
 
-func TestBlogRenderer(t *testing.T) {
+func TestRender(t *testing.T) {
+	approvals.UseFolder("testdata")
 	var (
 		aPost = blogrenderer.Post{
 			Title:       "Hello, World!",
@@ -24,11 +26,6 @@ func TestBlogRenderer(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		got := buf.String()
-		want := `<h1>Hello, World!</h1><p>This is the description.</p>Tags:<ul><li>golang</li><li>programming</li></ul>`
-
-		if got != want {
-			t.Errorf("got %s want %s", got, want)
-		}
+		approvals.VerifyString(t, buf.String())
 	})
 }
