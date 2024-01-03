@@ -4,6 +4,7 @@ import (
 	"embed"
 	"html/template"
 	"io"
+	"strings"
 )
 
 var (
@@ -14,6 +15,10 @@ var (
 type Post struct {
 	Title, Body, Description string
 	Tags                     []string
+}
+
+func (p Post) SanitisedTitle() string {
+	return strings.ToLower(strings.ReplaceAll(p.Title, " ", "-"))
 }
 
 type PostRenderer struct {
@@ -29,10 +34,10 @@ func NewPostRenderer() (*PostRenderer, error) {
 	return &PostRenderer{templ: templ}, nil
 }
 
-func (r *PostRenderer) Render(w io.Writer, p Post) error {
-	if err := r.templ.ExecuteTemplate(w, "blog.tmpl.html", p); err != nil {
-		return err
-	}
+func (r *PostRenderer) Render(writer io.Writer, post Post) error {
+	return r.templ.ExecuteTemplate(writer, "blog.tmpl.html", post)
+}
 
-	return nil
+func (r *PostRenderer) RenderIndex(writer io.Writer, posts []Post) error {
+	return r.templ.ExecuteTemplate(writer, "index.tmpl.html", posts)
 }
