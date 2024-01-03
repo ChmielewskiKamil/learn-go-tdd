@@ -16,7 +16,7 @@ var (
     postTemplate embed.FS
 )
 
-func Render(w io.Writer, p Post, a string) error {
+func Render(w io.Writer, p Post) error {
 	templ, err := template.ParseFS(postTemplate, "templates/*tmpl.html")
 	if err != nil {
 		return err
